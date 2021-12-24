@@ -4,4 +4,4 @@ Run prod: docker-compose up
 
 To use dev environment, npm install in both client and server
 
-Run dev: docker-compose -f docker-compose.dev.yml up
+Run dev: docker-compose -f docker-compose.dev.yml up --build
