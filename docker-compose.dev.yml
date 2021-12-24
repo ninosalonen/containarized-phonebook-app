@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  client:
+    image: client-dev
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    volumes: 
+      - ./client:/usr/src/app
+    ports:
+      - 3000:3000
+
+  server:
+    image: server-dev
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
+    volumes: 
+      - ./server:/usr/src/app
+    ports:
+      - 3001:3001
+    environment:
+      - MONGODB_URI=<MONGOURI>
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
